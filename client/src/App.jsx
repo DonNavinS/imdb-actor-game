@@ -22,7 +22,14 @@ function App() {
         //   (item) => item.role !== "Director" && item.role !== "Writer"
         // );
         // console.log(castNames.slice(0, 10));
-        console.log(response);
+        console.log(
+          response.data.results.roles.filter(
+            (item) =>
+              item.role !== "Director" &&
+              item.role !== "Writer" &&
+              item.role.includes("uncredited") === false
+          )
+        );
       })
       .catch(function (error) {
         console.error(error);
