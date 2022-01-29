@@ -6,10 +6,10 @@ function App() {
   const [movieResults, setMovieResults] = useState([]);
   const [actors, setActors] = useState([]);
 
-  const getCast = () => {
+  const getCast = (item) => {
     var options = {
       method: "GET",
-      url: "https://data-imdb1.p.rapidapi.com/movie/id/tt0086250/cast/",
+      url: `https://data-imdb1.p.rapidapi.com/movie/id/${item.imdbID}/cast/`,
       headers: {
         "x-rapidapi-host": "data-imdb1.p.rapidapi.com",
         "x-rapidapi-key": "7bca20d701msh6e19f6d29e75ea8p1fda7bjsnb742d201c4e9",
@@ -18,11 +18,11 @@ function App() {
 
     Axios.request(options)
       .then(function (response) {
-        setActors(
-          response.data.results.roles.filter(
-            (item) => item.role !== "Director" && item.role !== "Writer"
-          )
-        );
+        // const castNames = response.data.results.roles.filter(
+        //   (item) => item.role !== "Director" && item.role !== "Writer"
+        // );
+        // console.log(castNames.slice(0, 10));
+        console.log(response);
       })
       .catch(function (error) {
         console.error(error);
@@ -33,7 +33,7 @@ function App() {
     var options = {
       method: "GET",
       url: "https://movie-database-imdb-alternative.p.rapidapi.com/",
-      params: { s: movieName, r: "json", page: "1" },
+      params: { s: movieName.trim(), r: "json", page: "1" },
       headers: {
         "x-rapidapi-host": "movie-database-imdb-alternative.p.rapidapi.com",
         "x-rapidapi-key": "7bca20d701msh6e19f6d29e75ea8p1fda7bjsnb742d201c4e9",
@@ -42,8 +42,10 @@ function App() {
 
     Axios.request(options)
       .then(function (response) {
-        console.log(response.data.Search);
-        setMovieResults(response.data.Search);
+        // setMovieResults(response.data.Search);
+        setMovieResults(
+          response.data.Search.filter((item) => item.Poster !== "N/A")
+        );
       })
       .catch(function (error) {
         console.error(error);
@@ -52,7 +54,7 @@ function App() {
 
   return (
     <div className="flex flex-col justify-center items-center h-screen w-screen bg-gradient-to-tr from-violet-400 to-green-400 ">
-      <div className="flex gap-x-4 -translate-y-1/2">
+      <div className="flex gap-x-4 -translate-y-1/2 ">
         <button
           className="px-2 py-1 rounded border-double border-2 border-red-600 hover:text-white hover:bg-red-600 hover:scale-110 tranformation duration-200"
           onClick={getMovieID}
@@ -73,10 +75,11 @@ function App() {
               key={index}
               className="flex flex-col basis-1/5 justify-center items-center"
             >
-              <button>
+              <button onClick={() => getCast(item)}>
                 <img
-                  width="150vw"
-                  height="150vh"
+                  // width="150vw"
+                  // height="150vh"
+                  className="w-48 h-60"
                   src={item.Poster}
                   alt={`${item.Title} movie poster `}
                 />
