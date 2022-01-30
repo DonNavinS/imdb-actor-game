@@ -6,6 +6,7 @@ const { useGlobalState } = createGlobalState({
   actors: [],
   selectedMovie: [],
   guess: "",
+  guessResult: true,
 });
 
 export { useGlobalState };

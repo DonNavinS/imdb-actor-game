@@ -1,19 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useGlobalState } from "../GlobalState";
 
 function Play() {
   const [actors, setActors] = useGlobalState("actors");
   const [selectedMovie, setSelectedMovie] = useGlobalState("selectedMovie");
   const [guess, setGuess] = useGlobalState("guess");
+  const [guessResult, setGuessResult] = useState(null);
 
   const submitGuess = () => {
-    console.log(actors.includes(guess));
+    const newGuessResult = actors.includes(guess);
+    setGuessResult(newGuessResult);
+    console.log(newGuessResult);
   };
 
-  useEffect(() => {
-    setActors(selectedMovie.actors.map((item) => item.name));
-    console.log(selectedMovie);
-  }, [selectedMovie]);
   return (
     <div className="flex justify-center items-center">
       <div className="flex flex-col items-center">
@@ -27,10 +26,27 @@ function Play() {
           className="border-2 border-black rounded p-1"
           placeholder="Enter Actor Name"
           type="text"
-          onChange={(e) => {
-            setGuess(e.target.value);
-          }}
+          onChange={(e) => setGuess(e.target.value)}
         />
+
+        {guessResult !== null ? (
+          guessResult === true ? (
+            <div className="flex flex-col items-center justify-center bg-green-400 inset-y-36 inset-x-56 rounded-lg bg-opacity-90 absolute">
+              <div className=" ">Correct</div>
+              <button onClick={() => setGuessResult(null)} className="">
+                Continue
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center bg-red-400 inset-y-36 inset-x-56 rounded-lg bg-opacity-90 absolute">
+              <div className=" ">Incorrect</div>
+              <button onClick={() => setGuessResult(null)} className="">
+                Try Again
+              </button>
+            </div>
+          )
+        ) : null}
+        <p>{guess}</p>
         <button onClick={submitGuess}>Guess</button>
       </div>
     </div>
