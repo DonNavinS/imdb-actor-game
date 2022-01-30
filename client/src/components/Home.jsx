@@ -45,8 +45,8 @@ function Home() {
 
     Axios.request(options)
       .then(function (response) {
-        console.log(response.data.actors.map((actor) => actor.name));
-        setActors(response.data.actors.map((actor) => actor.name));
+        console.log(response.data.actors);
+        setActors(response.data.actors);
         setSelectedMovie(response.data);
       })
 
