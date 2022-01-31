@@ -9,6 +9,7 @@ function Home() {
   const [actors, setActors] = useGlobalState("actors");
   const [selectedMovie, setSelectedMovie] = useGlobalState("selectedMovie");
 
+  // SEARCH MOVIE NAME, RETURN MOVIE ID
   const getMovieID = () => {
     var options = {
       method: "GET",
@@ -31,6 +32,8 @@ function Home() {
         console.error(error);
       });
   };
+
+  // SEARCH MOVIE ID, GET MOVIE CAST
 
   const getCast = (item) => {
     var options = {
