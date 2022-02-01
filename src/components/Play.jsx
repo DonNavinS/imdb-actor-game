@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../GlobalState";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 
 function Play() {
   const [selectedMovie, setSelectedMovie] = useGlobalState("selectedMovie");
@@ -116,8 +117,11 @@ function Play() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen w-screen">
-      <section className="flex flex-col gap-y-4 items-center justify-center h-full w-full bg-gradient-to-tr from-violet-500 to-green-400 ">
+    <div className="flex flex-col justify-center items-center min-h-screen min-w-full  bg-gradient-to-tr from-violet-500 to-green-400 ">
+      <Link to="/home" className="font-bold text-4xl h-24">
+        IMDb Chain Game
+      </Link>
+      <section className="flex flex-col gap-y-4 items-center justify-center ">
         {movieRound ? (
           <div className="flex flex-col gap-y-2">
             <img
@@ -128,6 +132,13 @@ function Play() {
             <p className="text-center text-2xl font-semibold">
               {selectedMovie.title}
             </p>
+            <input
+              className="border-2 border-black rounded p-1"
+              placeholder="Enter Actor Name"
+              type="text"
+              value={guess}
+              onChange={(e) => setGuess(e.target.value)}
+            />
           </div>
         ) : (
           <div className="flex flex-col gap-y-2">
@@ -137,16 +148,16 @@ function Play() {
               alt={`${actorName} poster`}
             />
             <p className="text-center text-2xl font-semibold">{actorName}</p>
+            <input
+              className="border-2 border-black rounded p-1"
+              placeholder="Enter Actor Name"
+              type="text"
+              value={guess}
+              onChange={(e) => setGuess(e.target.value)}
+            />
           </div>
         )}
 
-        <input
-          className="border-2 border-black rounded p-1"
-          placeholder="Enter Actor Name"
-          type="text"
-          value={guess}
-          onChange={(e) => setGuess(e.target.value)}
-        />
         {guessResult !== null && movieRound ? (
           guessResult === true ? (
             <div className="flex flex-col items-center justify-center bg-green-400 inset-y-36 inset-x-56 rounded-lg bg-opacity-90 absolute">
@@ -183,14 +194,14 @@ function Play() {
         ) : null}
         {movieRound ? (
           <button
-            className="border-2 border-black p-2 rounded-xl hover:text-white hover:scale-110 transition duration-200"
+            className="px-2 py-1 rounded border-double border-2 border-red-500 hover:text-white hover:bg-red-500 hover:scale-110 tranformation duration-200"
             onClick={submitActorGuess}
           >
             Guess
           </button>
         ) : (
           <button
-            className="border-2 border-black p-2 rounded-xl hover:text-white hover:scale-110 transition duration-200"
+            className="px-2 py-1 rounded border-double border-2 border-red-500 hover:text-white hover:bg-red-500 hover:scale-110 tranformation duration-200"
             onClick={submitMovieGuess}
           >
             Guess
