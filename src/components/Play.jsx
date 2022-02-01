@@ -23,6 +23,7 @@ function Play() {
     if (actorsNames.includes(guess)) {
       setGuessResult(true);
       setActorID(actors.filter((item) => item.name === guess)[0].id);
+      setGuess("");
     } else {
       setGuessResult(false);
     }
@@ -35,6 +36,7 @@ function Play() {
         movieNames.find((item) => item === guess)
       );
       setCorrectMovieID(movieIDs[indexOfMovieID]);
+      setGuess("");
     } else {
       setGuessResult(false);
     }
@@ -42,7 +44,6 @@ function Play() {
 
   const correctActorGuess = () => {
     setGuessResult(null);
-    setGuess("");
     setActorID("");
     setMovieRound(false);
 
@@ -90,7 +91,6 @@ function Play() {
 
   //   SEARCH MOVIE ID, GET CAST, TITLE, IMAGE
   const correctMovieGuess = () => {
-    setGuess("");
     setGuessResult(null);
     setMovieRound(true);
 
@@ -160,16 +160,22 @@ function Play() {
 
         {guessResult !== null && movieRound ? (
           guessResult === true ? (
-            <div className="flex flex-col items-center justify-center bg-green-400 inset-y-36 inset-x-56 rounded-lg bg-opacity-90 absolute">
-              <div className=" ">Correct</div>
-              <button onClick={correctActorGuess} className="">
+            <div className="flex flex-col items-center justify-around bg-green-500 inset-y-24 inset-x-56 rounded-3xl bg-opacity-90 absolute transition duration-300">
+              <div className="font-bold text-4xl ">Correct</div>
+              <button
+                onClick={correctActorGuess}
+                className="border-black border-2 rounded-lg p-2 hover:bg-green-700 hover:text-white hover:scale-110 transition duration-200"
+              >
                 Continue
               </button>
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center bg-red-400 inset-y-36 inset-x-56 rounded-lg bg-opacity-90 absolute">
-              <div className="">Incorrect</div>
-              <button onClick={() => setGuessResult(null)} className="">
+            <div className="flex flex-col items-center justify-around bg-red-400 inset-y-24 inset-x-56 rounded-lg bg-opacity-90 absolute">
+              <div className="font-bold text-4xl">Incorrect</div>
+              <button
+                onClick={() => setGuessResult(null)}
+                className="border-black border-2 rounded-lg p-2 hover:bg-red-600 hover:text-white hover:scale-110 transition duration-200"
+              >
                 Try Again
               </button>
             </div>
@@ -177,16 +183,22 @@ function Play() {
         ) : null}
         {guessResult !== null && !movieRound ? (
           guessResult === true ? (
-            <div className="flex flex-col items-center justify-center bg-blue-400 inset-y-36 inset-x-56 rounded-lg bg-opacity-90 absolute">
-              <div className=" ">Correct</div>
-              <button onClick={correctMovieGuess} className="">
+            <div className="flex flex-col items-center justify-around bg-green-500 inset-y-24 inset-x-56 rounded-lg bg-opacity-90 absolute">
+              <div className=" font-bold text-4xl">Correct</div>
+              <button
+                onClick={correctMovieGuess}
+                className="border-black border-2 rounded-lg p-2 hover:bg-green-700 hover:text-white hover:scale-110 transition duration-200"
+              >
                 Continue
               </button>
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center bg-red-400 inset-y-36 inset-x-56 rounded-lg bg-opacity-90 absolute">
-              <div className="">Incorrect</div>
-              <button onClick={() => setGuessResult(null)} className="">
+            <div className="flex flex-col items-center justify-around bg-red-400 inset-y-24 inset-x-56 rounded-lg bg-opacity-90 absolute">
+              <div className="font-bold text-4xl">Incorrect</div>
+              <button
+                onClick={() => setGuessResult(null)}
+                className="border-black border-2 rounded-lg p-2 hover:bg-red-600 hover:text-white hover:scale-110 transition duration-200"
+              >
                 Try Again
               </button>
             </div>
