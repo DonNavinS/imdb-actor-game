@@ -116,25 +116,27 @@ function Play() {
   };
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="flex flex-col items-center">
+    <div className="flex justify-center items-center h-screen w-screen">
+      <section className="flex flex-col gap-y-4 items-center justify-center h-full w-full bg-gradient-to-tr from-violet-500 to-green-400 ">
         {movieRound ? (
-          <div>
+          <div className="flex flex-col gap-y-2">
             <img
-              className="w-48 h-64 rounded-lg"
+              className="w-64 h-96 rounded-lg"
               src={selectedMovie.image}
               alt={`${selectedMovie.title} poster`}
             />
-            <p className="text-center">{selectedMovie.title}</p>
+            <p className="text-center text-2xl font-semibold">
+              {selectedMovie.title}
+            </p>
           </div>
         ) : (
-          <div>
+          <div className="flex flex-col gap-y-2">
             <img
-              className="w-48 h-64 rounded-lg"
+              className="w-64 h-96 rounded-lg"
               src={actorImage}
               alt={`${actorName} poster`}
             />
-            <p className="text-center">{selectedMovie.title}</p>
+            <p className="text-center text-2xl font-semibold">{actorName}</p>
           </div>
         )}
 
@@ -180,19 +182,21 @@ function Play() {
           )
         ) : null}
         {movieRound ? (
-          <button onClick={submitActorGuess}>Guess</button>
+          <button
+            className="border-2 border-black p-2 rounded-xl hover:text-white hover:scale-110 transition duration-200"
+            onClick={submitActorGuess}
+          >
+            Guess
+          </button>
         ) : (
-          <button onClick={submitMovieGuess}>Guess</button>
+          <button
+            className="border-2 border-black p-2 rounded-xl hover:text-white hover:scale-110 transition duration-200"
+            onClick={submitMovieGuess}
+          >
+            Guess
+          </button>
         )}
-      </div>
-      <button
-        onClick={() => {
-          console.log(actors);
-          console.log(selectedMovie);
-        }}
-      >
-        CLICK
-      </button>
+      </section>
     </div>
   );
 }
