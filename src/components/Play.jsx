@@ -118,7 +118,7 @@ function Play() {
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen min-w-full  bg-gradient-to-tr from-violet-500 to-green-400 ">
-      <Link to="/home" className="font-bold text-4xl h-24">
+      <Link to="/home" className="font-bold text-4xl">
         IMDb Chain Game
       </Link>
       <section className="flex flex-col gap-y-4 items-center justify-center ">
